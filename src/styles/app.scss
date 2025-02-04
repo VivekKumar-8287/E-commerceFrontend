@@ -43,32 +43,29 @@ $color3: rgb(0, 104, 136);
 @import "login";
 @import "search";
 
-/* 
-@import "dashboard";
-@import "products";
-@import "chart";
-@import "tools";
-@import "mediaQuery";
- */
+@import "adminStyles/dashboard";
+@import "adminStyles/products";
+@import "adminStyles/chart";
+@import "adminStyles/tools";
+@import "adminStyles/mediaQuery";
 
- .container{
+.container {
   max-width: 1367px;
   width: 100%;
   margin: auto;
   overflow: auto;
-  >h1{
+  > h1 {
     @include heading;
     margin: 1rem 0;
-    text-align: left
+    text-align: left;
   }
- }
+}
 
- .heading{
+.heading {
   @include heading;
   margin: 1rem 0;
   text-align: center;
 }
-
 
 .header {
   @include flex(row, flex-end, stretch, 1.25rem);
@@ -98,17 +95,14 @@ $color3: rgb(0, 104, 136);
     width: 100px;
     position: absolute;
     left: calc(100% - 100px);
-    top:8%;
-    >div{
-        @include flex(column,flex-start,center,0.25rem);
+    top: 8%;
+    > div {
+      @include flex(column, flex-start, center, 0.25rem);
     }
   }
 }
 
-
-/* 
-
-.adminContainer {
+.admin-container {
   @include grid(1fr 4fr, 2rem);
   height: 100vh;
   background-color: rgb(247, 247, 247);
@@ -167,6 +161,7 @@ $color3: rgb(0, 104, 136);
     tr {
       box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.093);
     }
+
     td {
       padding: 1rem;
 
@@ -196,9 +191,11 @@ $color3: rgb(0, 104, 136);
           opacity: 0.6;
         }
       }
+
       &:first-child {
         border-left: none;
       }
+
       &:last-child {
         border-right: none;
       }
@@ -206,7 +203,7 @@ $color3: rgb(0, 104, 136);
   }
 }
 
-.tablePagination {
+.table-pagination {
   @include flex;
   padding: 2rem;
   > button {
@@ -231,7 +228,7 @@ $color3: rgb(0, 104, 136);
   border: none;
   outline: none;
   cursor: pointer;
-  color: rgb(44, 104, 255);
+  color: rgba(44, 104, 255);
   position: fixed;
   top: 1rem;
   left: 1rem;
@@ -241,7 +238,7 @@ $color3: rgb(0, 104, 136);
   z-index: 9;
 }
 
-#closeSidebar {
+#close-sidebar {
   width: 80%;
   margin: 1rem auto;
   display: block;
@@ -265,13 +262,17 @@ $color3: rgb(0, 104, 136);
     border-left: 1rem solid rgb(43, 43, 43);
     border-right: 1rem solid #fff;
     border-bottom: 1rem solid #fff;
-    animation: lodingAnimation 0.5s linear infinite;
+    animation: loading-animation 0.5s linear infinite;
   }
 }
 
-@keyframes lodingAnimation {
+@keyframes loading-animation {
   to {
     transform: rotateZ(360deg);
   }
 }
- */
+@keyframes up-and-down {
+  to {
+    transform: translate(-50%, -20%);
+  }
+}
