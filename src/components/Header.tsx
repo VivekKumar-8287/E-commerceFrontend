@@ -8,24 +8,24 @@ import {
 } from "react-icons/fa";
 import { useState } from "react";
 
-const user = { _id: "jsklfjds", role: "" };
-
-
+const user = { _id: "", role: "" };
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState<Boolean>(false);
 
-  const logoutHandler = ()=>{
+  const logoutHandler = () => {
     setIsOpen(false);
-  }
+  };
 
   return (
     <nav className="header">
-      <Link onClick={()=>setIsOpen(false)} to={"/"}>Home</Link>
-      <Link onClick={()=>setIsOpen(false)}  to={"/search"}>
+      <Link onClick={() => setIsOpen(false)} to={"/"}>
+        Home
+      </Link>
+      <Link onClick={() => setIsOpen(false)} to={"/search"}>
         <FaSearch />
       </Link>
-      <Link onClick={()=>setIsOpen(false)}  to={"/cart"}>
+      <Link onClick={() => setIsOpen(false)} to={"/cart"}>
         <FaShoppingBag />
       </Link>
       {user?._id ? (
@@ -36,9 +36,13 @@ const Header = () => {
           <dialog open={isOpen}>
             <div>
               {user.role === "admin" && (
-                <Link onClick={()=>setIsOpen(false)}  to={"/admin/dashboard"}>Admin</Link>
+                <Link onClick={() => setIsOpen(false)} to={"/admin/dashboard"}>
+                  Admin
+                </Link>
               )}
-              <Link onClick={()=>setIsOpen(false)}  to="/orders">Orders</Link>
+              <Link onClick={() => setIsOpen(false)} to="/orders">
+                Orders
+              </Link>
               <button onClick={logoutHandler}>
                 <FaSignOutAlt />
               </button>
