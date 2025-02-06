@@ -3,7 +3,9 @@ import AdminSidebar from "../../../components/admin/AdminSidebar";
 import { useSelector } from "react-redux";
 import { userReducerInitialState } from "../../../types/reducer-types";
 import { useNewProductMutation } from "../../../redux/api/productAPI";
-import {useNavigate} form "react-router-dom"
+import {useNavigate} from "react-router-dom";
+import { responseToast } from "../../../utils/features";
+
 
 const NewProduct = () => {
 
