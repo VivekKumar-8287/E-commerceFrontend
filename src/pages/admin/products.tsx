@@ -65,7 +65,7 @@ const Products = () => {
           action: <Link to={`/admin/product/${i._id}`}>Manage</Link>,
         }))
       );
-  });
+  },[data]);
 
   const Table = TableHOC<DataType>(
     columns,
