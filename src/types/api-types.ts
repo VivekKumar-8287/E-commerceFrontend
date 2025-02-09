@@ -49,3 +49,14 @@ export type CategoriesResponse = {
     id: string;
     formData: FormData;
   };
+
+  export type UpdateProductRequest = {
+  userId: string;
+  productId: string;
+  formData: FormData;
+  };
+
+  export type DeleteProductRequest = {
+    userId: string;
+    productId: string;
+    };
