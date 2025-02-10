@@ -3,9 +3,16 @@ import { VscError } from "react-icons/vsc";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CardItemCard from "../components/CardItem";
-import { addToCart, calculatePrice, removeCartItem } from "../redux/reducer/cartReducer";
+import {
+  addToCart,
+  calculatePrice,
+  discountApplied,
+  removeCartItem,
+} from "../redux/reducer/cartReducer";
 import { CartReducerInitialState } from "../types/reducer-types";
 import { CartItem } from "../types/types";
+import axios from "axios";
+import { server } from "../redux/store";
 
 const Cart = () => {
   const { cartItems, subtotal, tax, total, shippingCharges, discount } =
@@ -19,12 +26,12 @@ const Cart = () => {
   const [isValidCouponCode, setValidCouponCode] = useState<boolean>(false);
 
   const incrementHandler = (cartItem: CartItem) => {
-    if(cartItem.quantity >= cartItem.stock) return;
+    if (cartItem.quantity >= cartItem.stock) return;
     dispatch(addToCart({ ...cartItem, quantity: cartItem.quantity + 1 }));
   };
 
   const decrementHandler = (cartItem: CartItem) => {
-    if(cartItem.quantity <= 1) return;
+    if (cartItem.quantity <= 1) return;
 
     dispatch(addToCart({ ...cartItem, quantity: cartItem.quantity - 1 }));
   };
@@ -34,20 +41,31 @@ const Cart = () => {
   };
 
   useEffect(() => {
+    const {token: cancelToken, cancel} = axios.CancelToken.source();
     const timeOutId = setTimeout(() => {
-      if (Math.random() > 0.5) setValidCouponCode(true);
-      else setValidCouponCode(false);
+      axios
+        .get(`${server}/api/v1/payment/discount?coupon=${couponCode}`,{cancelToken})
+        .then((res) => {
+          dispatch(discountApplied(res.data.discount))
+          setValidCouponCode(true);
+          dispatch(calculatePrice());
+        })
+        .catch(() => {
+          dispatch(discountApplied(0));
+          setValidCouponCode(false);
+          dispatch(calculatePrice());
+        });
     }, 1000);
     return () => {
       clearTimeout(timeOutId);
+      cancel();
       setValidCouponCode(false);
     };
   }, [couponCode]);
 
   useEffect(() => {
-      dispatch(calculatePrice())
-  }, [cartItems])
-  
+    dispatch(calculatePrice());
+  }, [cartItems]);
 
   return (
     <div className="cart">

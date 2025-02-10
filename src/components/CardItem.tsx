@@ -11,6 +11,7 @@ type CardItemProps = {
 };
 
 const CardItem = ({ cartItem, incrementHandler, decrementHandler, removeHandler }: CardItemProps) => {
+  
   const { photo, productId, name, price, quantity } = cartItem;
 
   return (
