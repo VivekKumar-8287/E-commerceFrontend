@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { VscError } from "react-icons/vsc";
-import CardItemCard from "../components/CardItem";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import CardItemCard from "../components/CardItem";
+import { addToCart, calculatePrice, removeCartItem } from "../redux/reducer/cartReducer";
 import { CartReducerInitialState } from "../types/reducer-types";
 import { CartItem } from "../types/types";
-import { addToCart, removeCartItem } from "../redux/reducer/cartReducer";
 
 const Cart = () => {
   const { cartItems, subtotal, tax, total, shippingCharges, discount } =
@@ -42,7 +42,12 @@ const Cart = () => {
       clearTimeout(timeOutId);
       setValidCouponCode(false);
     };
-  }, []);
+  }, [couponCode]);
+
+  useEffect(() => {
+      dispatch(calculatePrice())
+  }, [cartItems])
+  
 
   return (
     <div className="cart">
