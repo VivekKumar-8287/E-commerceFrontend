@@ -1,27 +1,37 @@
 import { useEffect, useState } from "react";
 import { VscError } from "react-icons/vsc";
-import CardItem from "../components/CardItem";
+import CardItemCard from "../components/CardItem";
 import { Link } from "react-router-dom";
-
-const cartItems = [
-  {
-    productId: "asdfdfd",
-    photo: "https://igotoffer.com/apple/wp-content/uploads/2017/05/macbook-12-inch-early-2016.jpg",
-    name: "Macbook",
-    price: 3000,
-    quantity: 4,
-    stock: 10,
-  },
-];
-const subtotal = 4000;
-const tax = Math.round(subtotal * 0.18);
-const shippingCharges = 200;
-const discount = 400;
-const total = subtotal + tax + shippingCharges;
+import { useDispatch, useSelector } from "react-redux";
+import { CartReducerInitialState } from "../types/reducer-types";
+import { CartItem } from "../types/types";
+import { addToCart, removeCartItem } from "../redux/reducer/cartReducer";
 
 const Cart = () => {
+  const { cartItems, subtotal, tax, total, shippingCharges, discount } =
+    useSelector(
+      (state: { cartReducer: CartReducerInitialState }) => state.cartReducer
+    );
+
+  const dispatch = useDispatch();
+
   const [couponCode, setCouponCode] = useState<string>("");
   const [isValidCouponCode, setValidCouponCode] = useState<boolean>(false);
+
+  const incrementHandler = (cartItem: CartItem) => {
+    if(cartItem.quantity >= cartItem.stock) return;
+    dispatch(addToCart({ ...cartItem, quantity: cartItem.quantity + 1 }));
+  };
+
+  const decrementHandler = (cartItem: CartItem) => {
+    if(cartItem.quantity <= 1) return;
+
+    dispatch(addToCart({ ...cartItem, quantity: cartItem.quantity - 1 }));
+  };
+
+  const removeHandler = (productId: string) => {
+    dispatch(removeCartItem(productId));
+  };
 
   useEffect(() => {
     const timeOutId = setTimeout(() => {
@@ -40,7 +50,13 @@ const Cart = () => {
         {cartItems.length > 0 ? (
           cartItems.map((i, idx) => (
             <div>
-              <CardItem key={idx} cartItem={i} />
+              <CardItemCard
+                incrementHandler={incrementHandler}
+                decrementHandler={decrementHandler}
+                removeHandler={removeHandler}
+                key={idx}
+                cartItem={i}
+              />
             </div>
           ))
         ) : (
