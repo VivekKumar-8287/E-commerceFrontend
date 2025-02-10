@@ -7,8 +7,8 @@ import {
   UpdateOrderRequest,
 } from "../../types/api-types";
 
-export const orderApi = createApi({
-  reducerPath: "orderApi",
+export const orderAPI = createApi({
+  reducerPath: "orderAPI",
   baseQuery: fetchBaseQuery({
     baseUrl: `${import.meta.env.VITE_SERVER}/api/v1/order/`,
   }),
@@ -32,15 +32,15 @@ export const orderApi = createApi({
       }),
       invalidatesTags: ["orders"],
     }),
-    myOrder: builder.mutation<AllOrdersResponse, string>({
+    myOrder: builder.query<AllOrdersResponse, string>({
       query: (id) => `my?id=${id}`,
       providesTags: ["orders"],
     }),
-    allOrder: builder.mutation<AllOrdersResponse, string>({
+    allOrder: builder.query<AllOrdersResponse, string>({
       query: (id) => `all?id=${id}`,
       providesTags: ["orders"],
     }),
-    orderDetails: builder.mutation<OrderDetailsResponse, string>({
+    orderDetails: builder.query<OrderDetailsResponse, string>({
       query: (id) => id,
       providesTags: ["orders"],
     }),
@@ -51,7 +51,7 @@ export const {
   useNewOrderMutation,
   useUpdateOrderMutation,
   useDeleteOrderMutation,
-  useMyOrderMutation,
-  useAllOrderMutation,
-  useOrderDetailsMutation,
-} = orderApi;
+  useAllOrderQuery,
+  useMyOrderQuery,
+  useOrderDetailsQuery
+} = orderAPI;

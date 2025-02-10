@@ -8,8 +8,8 @@ import { auth } from "./firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { userExist, userNotExist } from "./redux/reducer/userReducer";
 import { getUser } from "./redux/api/userAPI";
-import { userReducerInitialState } from "./types/reducer-types";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { UserReducerInitialState } from "./types/reducer-types";
 
 const Home = lazy(() => import("./pages/Home"));
 const Search = lazy(() => import("./pages/Search"));
@@ -18,6 +18,7 @@ const Shipping = lazy(() => import("./pages/Shipping"));
 const Login = lazy(() => import("./pages/Login"));
 const Orders = lazy(() => import("./pages/Orders"));
 const OrderDetails = lazy(() => import("./pages/OrderDetails"));
+const NotFound = lazy(() => import("./pages/not-found"));
 
 // Admin Routes Importing
 const Dashboard = lazy(() => import("./pages/admin/dashboard"));
@@ -40,7 +41,7 @@ const TransactionManagement = lazy(
 
 const App = () => {
   const { user, loading } = useSelector(
-    (state: { userReducer: userReducerInitialState }) => state.userReducer
+    (state: { userReducer: UserReducerInitialState }) => state.userReducer
   );
   const dispatch = useDispatch();
 
@@ -117,6 +118,7 @@ const App = () => {
               element={<TransactionManagement />}
             />
           </Route>
+          <Route path="*" element={<NotFound/>}/>
         </Routes>
       </Suspense>
       <Toaster position="bottom-center" />
