@@ -3,16 +3,13 @@ import AdminSidebar from "../../../components/admin/AdminSidebar";
 import { useSelector } from "react-redux";
 import { userReducerInitialState } from "../../../types/reducer-types";
 import { useNewProductMutation } from "../../../redux/api/productAPI";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { responseToast } from "../../../utils/features";
 
-
 const NewProduct = () => {
-
-  const {user} = useSelector(
-    (state: {userReducer: userReducerInitialState}) => state.userReducer
-  )
-
+  const { user } = useSelector(
+    (state: { userReducer: userReducerInitialState }) => state.userReducer
+  );
 
   const [name, setName] = useState<string>("");
   const [category, setCategory] = useState<string>("");
@@ -40,21 +37,20 @@ const NewProduct = () => {
     }
   };
 
-  const submitHandler = async(e:FormEvent<HTMLFormElement>) => {
+  const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if(!name || !price || !stock || !category || !photo) return;
+    if (!name || !price || stock < 0 || !category || !photo) return;
     const formData = new FormData();
-  
+
     formData.set("name", name);
     formData.set("price", price.toString());
     formData.set("stock", stock.toString());
     formData.set("photo", photo);
     formData.set("category", category);
-  
-    const res = await newProduct({id: user?._id!, formData})
 
-    responseToast(res,navigate,"/admin/product")
+    const res = await newProduct({ id: user?._id!, formData });
 
+    responseToast(res, navigate, "/admin/product");
   };
 
   return (
@@ -67,7 +63,7 @@ const NewProduct = () => {
             <div>
               <label>Name</label>
               <input
-              required
+                required
                 type="text"
                 placeholder="Name"
                 value={name}
@@ -77,7 +73,7 @@ const NewProduct = () => {
             <div>
               <label>Price</label>
               <input
-              required
+                required
                 type="number"
                 placeholder="Price"
                 value={price}
@@ -87,7 +83,7 @@ const NewProduct = () => {
             <div>
               <label>Stock</label>
               <input
-              required
+                required
                 type="number"
                 placeholder="Stock"
                 value={stock}
@@ -98,7 +94,7 @@ const NewProduct = () => {
             <div>
               <label>Category</label>
               <input
-              required
+                required
                 type="text"
                 placeholder="eg. laptop, camera etc"
                 value={category}
