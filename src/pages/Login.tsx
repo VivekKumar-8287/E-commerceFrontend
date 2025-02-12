@@ -17,7 +17,7 @@ const Login = () => {
     try {
       const provider = new GoogleAuthProvider();
       const { user } = await signInWithPopup(auth, provider);
-
+/* 
       console.log({
         name: user.displayName!,
         email: user.email!,
@@ -27,7 +27,7 @@ const Login = () => {
         dob: date,
         _id: user.uid,
       });
-
+ */
       const res = await login({
         name: user.displayName!,
         email: user.email!,
