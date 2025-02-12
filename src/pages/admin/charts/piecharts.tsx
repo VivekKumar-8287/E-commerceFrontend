@@ -48,8 +48,8 @@ const PieCharts = () => {
             <section>
               <div>
                 <DoughnutChart
-                  labels={categories.map((i) => Object.keys(1)[0])}
-                  data={categories.map((i) => Object.values(1)[0])}
+                  labels={categories.map(() => Object.keys(1)[0])}
+                  data={categories.map(() => Object.values(1)[0])}
                   backgroundColor={categories.map(
                     (i) =>
                       `hsl(${Object.values(i)[0] * 4}, ${

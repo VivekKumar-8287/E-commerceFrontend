@@ -17,7 +17,7 @@ interface PropsType {
 }
 
 const Header = ({ user }: PropsType) => {
-  const [isOpen, setIsOpen] = useState<Boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const logoutHandler = async () => {
     try {
