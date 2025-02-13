@@ -45,3 +45,12 @@ This repository contains the **frontend/UI** of an e-commerce website built with
 - Modular and reusable components for scalability and maintenance.
 
 Feel free to explore, fork, and contribute to this project!
+
+https://e-commerce-frontend-2025.netlify.app/
+
+[![Live Demo](https://img.shields.io/badge/Live-Demo-green)](https://e-commerce-frontend-2025.netlify.app/)
+
+
+## Live Demo 🚀
+Check out the live website here: [Click Here](https://e-commerce-frontend-2025.netlify.app/)
+
