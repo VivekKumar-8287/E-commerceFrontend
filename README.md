@@ -47,9 +47,17 @@ This repository contains the **frontend/UI** of an e-commerce website built with
 Feel free to explore, fork, and contribute to this project!
 
 ## Live Demo 🚀
-
 ### Check out the live website here:
 [![Live Demo](https://img.shields.io/badge/Live-Demo-green)](https://e-commerce-frontend-2025.netlify.app/)
+
+### Screen Recorded
+
+
+https://github.com/user-attachments/assets/0b161863-3675-4070-9ed6-2846d43fc9ff
+
+
+
+
 
 
 
